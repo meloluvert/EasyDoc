@@ -9,7 +9,7 @@ export function InitialPage1() {
 
         <View>
                 <Text style={stylesInitial.title}>Edite seus documentos com facilidade</Text>
-                <Text style={stylesInitial.paragrafo}>Bem-vindo ao <Text style={styles.bold}> Easy Doc</Text>, o seu assistente de documentação pessoal. Aqui, oferecemos mais de <Text style={styles.bold}> 10 modelos de documentos</Text> prontos para uso. Com a nossa interface intuitiva, você pode editar seus documentos com facilidade, economizando tempo e esforço.</Text>
+                <Text style={stylesInitial.paragrafo}>Bem-vindo ao <Text style={styles.bold}> Easy Doc</Text>, o seu assistente de documentação pessoal. Aqui, oferecemos mais de <Text style={styles.bold}> 10 modelos de currículos</Text> prontos para uso. Com a nossa interface intuitiva, você pode editar seus documentos com facilidade, economizando tempo e esforço.</Text>
 
         </View>
     )
