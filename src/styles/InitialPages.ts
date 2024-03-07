@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native'
-
+import { OpenSans_800ExtraBold_Italic } from '@expo-google-fonts/open-sans'
 export const stylesInitial = StyleSheet.create({
     container: {
         flex:1
@@ -30,7 +30,8 @@ export const stylesInitial = StyleSheet.create({
     iconText:{
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:50
+        marginBottom:50,
+        fontFamily:'OpenSans_800ExtraBold_Italic'
     },
     SwitchButtonContainer:{
         display: 'flex',
