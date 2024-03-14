@@ -2,8 +2,8 @@ import { pagesArray } from "./pagesArray";
 import { stylesInitial } from '../../styles/InitialPages'
 import { View, Text, ImageBackground, Image, TouchableHighlight, TouchableOpacity } from "react-native"
 import { useState, Dispatch, SetStateAction } from "react";
-import { Buttons } from "../../components/InitialPages/Buttons"
-import { ImageText } from '../../components/InitialPages/ImageText'
+import { Buttons } from "../../components/ArrowButton"
+import { ImageText } from '../../components/ImageText'
 export function InitialPage() {
     const background1 = require('../../assets/Initial/1.png')
     const background2 = require('../../assets/Initial/2.png')
