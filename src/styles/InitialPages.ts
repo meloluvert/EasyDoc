@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import { colors } from './colors'
 export const stylesInitial = StyleSheet.create({
     //para as duas páginas
     container: {
@@ -16,11 +17,13 @@ export const stylesInitial = StyleSheet.create({
     },
     title:{
         fontSize: 40,
-        fontFamily:'OpenSans_800ExtraBold'
+        fontFamily:'OpenSans_800ExtraBold',
+        color: colors.white
     },
     paragrafo:{
         fontSize: 20,
-        textAlign:'justify'
+        textAlign:'justify',
+        color: colors.white
     },
 
     iconApp:{

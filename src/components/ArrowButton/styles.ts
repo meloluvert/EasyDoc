@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import { colors } from '../../styles/colors'
 export const stylesButtons = StyleSheet.create({
         //botões
         SwitchButtonContainer:{
@@ -32,6 +33,7 @@ export const stylesButtons = StyleSheet.create({
             padding:0,
             margin:0,
             marginBottom:20,
+            color:colors.white,
         },
         SwitchButtonActived:{
     
