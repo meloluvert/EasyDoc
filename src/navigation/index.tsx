@@ -5,7 +5,8 @@ export default function Navigator(){
     return (
         <NavigationContainer>
 
-<MenuTabs/>
+{/* <MenuTabs/> */}
+
         </NavigationContainer>
     )
 }

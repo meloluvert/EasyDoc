@@ -1,12 +1,14 @@
 
-import { Text } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { InitialPage } from "./src/screens/InitialPages";
 import Navigator from "./src/navigation";
 import { useState } from "react";
+import { StyleSheet } from "react-native";
 //https://github.com/expo/google-fonts/tree/master/font-packages/open-sans
 //veio daqui
-import { OpenSans_800ExtraBold, useFonts } from "@expo-google-fonts/open-sans/";
 
+import { OpenSans_800ExtraBold, useFonts } from "@expo-google-fonts/open-sans/";
+import { Login } from './src/screens/Login'
 
 export default function App() {
   const [page, setPage] = useState(0)
@@ -23,7 +25,21 @@ export default function App() {
       <InitialPage page={page} setPage={setPage} />
     );
   } else {
-    return (<Navigator />);
+    return (
+
+
+      <SafeAreaView style={stylesArea.container} >
+        <Login />
+      </SafeAreaView>
+
+    );
   }
 
 }
+
+const stylesArea = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop:50
+  }
+});
