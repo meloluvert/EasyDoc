@@ -1,11 +1,13 @@
 import * as React from "react"
 import {NavigationContainer} from "@react-navigation/native"
 import {MenuTabs} from "../navigation/MainNavigation"
-export default function Navigator(){
+import { LoginNavigation } from "./AuthNavigation"
+export default function Navigaton(){
     return (
         <NavigationContainer>
 
 {/* <MenuTabs/> */}
+<LoginNavigation/>
 
         </NavigationContainer>
     )

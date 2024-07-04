@@ -6,9 +6,11 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 //https://github.com/expo/google-fonts/tree/master/font-packages/open-sans
 //veio daqui
-
+import React from "react";
 import { OpenSans_800ExtraBold, useFonts } from "@expo-google-fonts/open-sans/";
 import { Login } from './src/screens/Login'
+import { LoginNavigation } from "./src/navigation/AuthNavigation";
+import Navigaton from "./src/navigation";
 
 export default function App() {
   const [page, setPage] = useState(0)
@@ -29,7 +31,7 @@ export default function App() {
 
 
       <SafeAreaView style={stylesArea.container} >
-        <Login />
+        <Navigaton />
       </SafeAreaView>
 
     );
