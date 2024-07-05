@@ -1,5 +1,5 @@
 import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native'
-import { btnAuthStyle } from './styles.ts'
+import { btnAuthStyle } from './styles'
 import React from 'react'
 export interface IBInterface extends TouchableOpacityProps {
     onPressI: () => void

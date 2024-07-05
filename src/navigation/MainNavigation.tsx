@@ -5,6 +5,7 @@ import { Profile } from "../screens/Profile";
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from "../styles/colors";
+import { LoginTypes } from "./AuthNavigation";
 
 {/* o que devo passar para as telas, no caso, nenhuma informação*/ }
 type MenuTabParam = {
@@ -17,7 +18,8 @@ export type MenuTabTypes = {
     navigation: MenuScreenNavigator
 }
 
-export function MenuTabs() {
+export function MenuTabs({navigation}:LoginTypes) {
+    /*não sei se devo retirar ou deixar esse parâmetro */
     const Tab = createBottomTabNavigator<MenuTabParam>();
     return (
         <Tab.Navigator

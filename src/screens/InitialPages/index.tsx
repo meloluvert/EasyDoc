@@ -4,6 +4,7 @@ import { View, Text, ImageBackground, Image, TouchableHighlight, TouchableOpacit
 import { useState, Dispatch, SetStateAction } from "react";
 import { Buttons } from "../../components/ArrowButton"
 import { ImageText } from '../../components/ImageText'
+import React from "react";
 interface InitialProps {
     page: number;
     setPage: Dispatch<SetStateAction<number>>;

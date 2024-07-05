@@ -6,13 +6,15 @@ export const btnAuthStyle = StyleSheet.create({
         backgroundColor: colors.primary,
         borderRadius:5,
         padding: 15,
-        width:300
+        width:300,
+        marginVertical:5
     },
     btnsecondary:{
         backgroundColor: colors.secondary,
         borderRadius:5,
         padding: 15,
-        width:300
+        width:300,
+        marginVertical:5
     },
     text:{
         textAlign:'center',
