@@ -16,19 +16,15 @@ export type LoginTypes = {
 export function LoginNavigation() {
     const Stack = createStackNavigator<LoginStackParamList>()
     return (
-        <Stack.Navigator>
+        <Stack.Navigator >
             <Stack.Screen name='Login' component={Login}
                 options={{
-                    headerStyle: {
-                        height: 0
-                    }
+                    headerShown:false
                 }}
             />
             <Stack.Screen name='Register' component={Register}
                 options={{
-                    headerStyle: {
-                        height: 0
-                    }
+                    headerShown:false
                 }}
             />
             {/*não sei se devo retirar ou deixar esse parâmetro */}

@@ -10,6 +10,7 @@ import React from "react";
 import { OpenSans_800ExtraBold, useFonts } from "@expo-google-fonts/open-sans/";
 import { Login } from './src/screens/Login'
 import { LoginNavigation } from "./src/navigation/AuthNavigation";
+import { AuthProvider } from "./src/context/auth";
 import Navigaton from "./src/navigation";
 
 export default function App() {
@@ -30,9 +31,14 @@ export default function App() {
     return (
 
 
-      <SafeAreaView style={stylesArea.container} >
-        <Navigaton />
-      </SafeAreaView>
+
+      <>
+        <AuthProvider>
+          <Navigaton />
+        </AuthProvider>
+      </>
+      // <SafeAreaView style={stylesArea.container} >
+      // </SafeAreaView>
 
     );
   }
@@ -42,6 +48,6 @@ export default function App() {
 const stylesArea = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:50
+    marginTop: 50
   }
 });

@@ -18,7 +18,7 @@ export type MenuTabTypes = {
     navigation: MenuScreenNavigator
 }
 
-export function MenuTabs({navigation}:LoginTypes) {
+export function MenuTabs() {
     /*não sei se devo retirar ou deixar esse parâmetro */
     const Tab = createBottomTabNavigator<MenuTabParam>();
     return (
