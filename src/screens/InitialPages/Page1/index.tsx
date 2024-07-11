@@ -1,6 +1,7 @@
 import { ImageBackground, View , Text} from 'react-native'
 import { stylesInitial } from '../../../styles/InitialPages'
 import { styles } from '../../../styles/GlobalStyle'
+import React from 'react'
 
 export function InitialPage1() {
 
