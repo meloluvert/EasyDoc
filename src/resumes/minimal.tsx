@@ -1,4 +1,6 @@
 ﻿
+const name = 'oi'
+
 export const minimalGray = `
 <!DOCTYPE html>
 <html>
@@ -678,7 +680,7 @@ button:active, a[role="button"]:active {
                             <li>
                                 <div>
                                     <p class="sanserif">M.S., Human Computer Interaction</p>
-                                    <time>Sept '12 – May '14</time>
+                                    <time>${name}</time>
                                 </div>
                                 <div>
                                     <span>Massachusetts Institute of Technology</span>

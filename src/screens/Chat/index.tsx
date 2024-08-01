@@ -1,11 +1,14 @@
 import React from "react";
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
 import { apiMessage } from "../../services/data";
-import { IResponseChat } from "../../services/data/Chat";
+import { IMessage, IResponseChat } from "../../services/data/Chat";
 import { useAuth } from "../../hook/auth";
-export function Chat() {
+import { MessageTypes } from "../../navigation/messageNavigation";
+import { AntDesign } from "@expo/vector-icons";
+import { colors } from "../../styles/colors";
+export function Chat({navigation}:MessageTypes) {
     const [message, setMessage] = useState<IResponseChat[]>([])
     const { setLoading } = useAuth()
     useEffect(() => {
@@ -16,6 +19,7 @@ export function Chat() {
         }
         setLoading(false)
         loadMessage()
+        navigation.addListener("focus", ()=> loadMessage())
     }, [])
     interface itemMessage {
         item: IResponseChat
@@ -24,6 +28,7 @@ export function Chat() {
     const renderItem = (({ item }: itemMessage) => {
         return (
             <View style={styles.item} >
+                <Text style={styles.itemText}> Nome:{item.user.name}</Text>
                 <Text style={styles.itemText}> Título: {item.title} </Text>
                 < Text style={styles.itemText} > Mensagem: {item.message} </Text>
             </View>
@@ -41,6 +46,10 @@ export function Chat() {
                             />
         )
             }
+            <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("CadMessage")}>
+            <AntDesign name="pluscircle" size={40} color={colors.white}></AntDesign>
+            </TouchableOpacity>
+
         </View>
     )
 }

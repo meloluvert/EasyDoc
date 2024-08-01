@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from "../styles/colors";
 import { LoginTypes } from "./AuthNavigation";
 import Entypo from '@expo/vector-icons/Entypo';
-
+import { MessageNavigation } from "./messageNavigation";
 
 {/* o que devo passar para as telas, no caso, nenhuma informação*/ }
 type MenuTabParam = {
@@ -27,38 +27,34 @@ export function MenuTabs() {
     const Tab = createBottomTabNavigator<MenuTabParam>();
     return (
         <Tab.Navigator
-        
-        screenOptions={{
-            tabBarActiveTintColor: colors.white,
-            tabBarStyle: { position: 'absolute', height:70, backgroundColor:colors.primary }
-          }}
+
+            screenOptions={{
+                tabBarActiveTintColor: colors.white,
+                tabBarStyle: { position: 'absolute', height: 70, backgroundColor: colors.primary }
+            }}
         >
-           
-                <Tab.Screen name="Docs" component={Docs}
+
+            <Tab.Screen name="Docs" component={Docs}
                 options={{
-                    tabBarIcon:() =>(
+                    tabBarIcon: () => (
                         <Ionicons name="document-text" size={50} color="white" />
                     )
-                  }
+                }
 
 
                 } />
-                 <Tab.Screen name="Profile" component={Profile}
+            <Tab.Screen name="Profile" component={Profile}
                 options={{
-                    tabBarIcon:() =>(
+                    tabBarIcon: () => (
                         <Ionicons name="person" size={50} color="white" />
                     )
-                  }
-
-
+                }
                 } />
-                 <Tab.Screen name="Chat" component={Chat}
+            <Tab.Screen name="Chat" component={MessageNavigation}
                 options={{
-                    tabBarIcon:() =>(
-<Entypo name="chat" size={50} color="white" />                    )
-                  }
-
-
+                    tabBarIcon: () => (
+                        <Entypo name="chat" size={50} color="white" />)
+                }
                 } />
 
 
