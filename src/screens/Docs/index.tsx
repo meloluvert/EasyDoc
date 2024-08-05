@@ -3,11 +3,14 @@ import { View, Text, TouchableOpacity } from "react-native"
 import { printToFileAsync } from "expo-print"
 import { FlatList } from "react-native"
 import { shareAsync } from "expo-sharing"
-import { minimalGray, orangeWhite } from "../../resumes/index"
+import { orangeWhite } from "../../resumes/index"
 import { CardResume } from "../../components/CardResume"
+import { renderMinimal } from "../../resumes/Minimal/minimal"
+import { useEffect } from "react"
+   
 export function Docs() {
-
-    const html = minimalGray;
+     const minimalGray = renderMinimal()
+    
 
     const data = [
         {
