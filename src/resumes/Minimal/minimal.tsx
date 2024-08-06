@@ -1,11 +1,11 @@
 ﻿
-const name = 'oi'
 import { css } from "./css"
 import { useEffect } from "react";
 import {useProfileData} from '../../services/data/Resume/index'
-export function renderMinimal(){
-    useProfileData().getData()
-    const { data } = useProfileData();
+import { IResume } from "../../screens/Profile";
+export function renderMinimal(data:IResume){
+
+    console.log('a')
     const minimalGray = `
     ${css}
     
@@ -20,11 +20,11 @@ export function renderMinimal(){
                                 <p><i class="fa fa-map-marker-alt" title="Location"></i> San Francisco, CA</p>
                             </li>
                             <li>
-                                <p><i class="fa fa-phone" title="Cell phone"></i> <a href="tel:4153234000">${data.telefone}</a></p>
+                                <p><i class="fa fa-phone" title="Cell phone"></i> <a href="tel:4153234000">${data?.telefone}</a></p>
                             </li>
                             <li>
                                 <p><i class="fa fa-envelope" title="Email"></i> <a
-                                        href="mailto:joe@joesmith.site">${data.email}</a></p>
+                                        href="mailto:joe@joesmith.site">${data?.email}</a></p>
                             </li>
                             <li>
                                 <p><i class="fa fa-globe-americas" title="Website"></i> <a
@@ -84,7 +84,7 @@ export function renderMinimal(){
                                     font-family="Montserrat-Regular, Montserrat" font-size="48" font-weight="normal">
                                     <g id="Letter" transform="translate(-54.000000, -140.000000)" fill="#484848">
                                         <text id="JOE-SMITH">
-                                            <tspan x="54.728" y="174">${data.name}</tspan>
+                                            <tspan x="54.728" y="174">${data?.name}</tspan>
                                         </text>
                                     </g>
                                 </g>
@@ -156,7 +156,7 @@ export function renderMinimal(){
                                 <li>
                                     <div>
                                         <p class="sanserif">M.S., Human Computer Interaction</p>
-                                        <time>${name}</time>
+                                        <time></time>
                                     </div>
                                     <div>
                                         <span>Massachusetts Institute of Technology</span>

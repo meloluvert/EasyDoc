@@ -34,7 +34,7 @@ export function Chat({navigation}:MessageTypes) {
             </View>
         )
     })
-
+    
     return (
         <View style={styles.container} >
             {

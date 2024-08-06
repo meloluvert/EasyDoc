@@ -30,6 +30,6 @@ export function useProfileData() {
     useEffect(() => {
         getData();
     }, []);
-    console.log('data:', data)
+    //console.log('data:', data)
     return { data, getData };
 }
