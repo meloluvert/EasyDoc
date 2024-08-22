@@ -7,6 +7,7 @@ import { formStyles } from "./styles";
 import { profile } from "./styles";
 import { ButtonInterface } from "../../components/ButtonAuth";
 import { ScrollView } from "react-native";
+import { ProfileTypes } from "../../navigation/profileNavigation";
 export interface IResume {
     name?: string;
     email?: string;
@@ -15,7 +16,7 @@ export interface IResume {
     desc?: string;
 }
 
-export function Profile() {
+export function Profile({navigation}: ProfileTypes) {
     const [data, setData] = useState<IResume>({ name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Inicializa com um objeto vazio ou com dados padrão
     const { user, signOut } = useAuth();
     useEffect(() => {
@@ -100,6 +101,7 @@ export function Profile() {
                     onChangeText={(text) => handleChange({ name: text })}
                 />
             </View>
+            <ButtonInterface title="Adicionar Foto" type="primary" onPressI={() => navigation.navigate('Camera')} />
             <View style={formStyles.formInput}>
                 <Text>Email</Text>
                 <TextInput

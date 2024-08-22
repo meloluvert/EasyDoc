@@ -9,11 +9,12 @@ import { colors } from "../styles/colors";
 import { LoginTypes } from "./AuthNavigation";
 import Entypo from '@expo/vector-icons/Entypo';
 import { MessageNavigation } from "./messageNavigation";
+import { ProfileNavigation } from "./profileNavigation";
 
 {/* o que devo passar para as telas, no caso, nenhuma informação*/ }
 type MenuTabParam = {
     Docs: undefined
-    Profile: undefined
+    Perfil: undefined
     Chat: undefined
 }
 
@@ -43,7 +44,7 @@ export function MenuTabs() {
 
 
                 } />
-            <Tab.Screen name="Profile" component={Profile}
+            <Tab.Screen name="Perfil" component={ProfileNavigation}
                 options={{
                     tabBarIcon: () => (
                         <Ionicons name="person" size={50} color="white" />
