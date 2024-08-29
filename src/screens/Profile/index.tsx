@@ -101,7 +101,7 @@ export function Profile({navigation}: ProfileTypes) {
                     onChangeText={(text) => handleChange({ name: text })}
                 />
             </View>
-            <ButtonInterface title="Adicionar Foto" type="primary" onPressI={() => navigation.navigate('Camera')} />
+            <ButtonInterface title="Adicionar Foto" type="primary" onPressI={() => navigation.navigate('Adicionar Foto')} />
             <View style={formStyles.formInput}>
                 <Text>Email</Text>
                 <TextInput

@@ -3,9 +3,11 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 
 import { Profile } from '../screens/Profile';
 import { Camera } from '../screens/Camera';
+import { Imagens } from '../screens/Images';
 type ProfileStackParamList = {
     Profile: undefined
-    Camera: undefined
+    "Adicionar Foto": undefined
+    "Câmera": undefined
 }
 type ProfileScreenNavigationProp = StackNavigationProp<ProfileStackParamList, 'Profile'>
 export type ProfileTypes = {
@@ -16,7 +18,8 @@ export function ProfileNavigation() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Profile' component={Profile} />
-            <Stack.Screen name='Camera' component={Camera} />
+            <Stack.Screen name='Adicionar Foto' component={Imagens} />
+            <Stack.Screen name='Câmera' component={Camera} />
         </Stack.Navigator>
     )
 }
