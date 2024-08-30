@@ -3,3 +3,6 @@ export const colors = {
     secondary: '#37474F',
     white:'#fff'
 }
+export const consts = {
+    widthForm:350
+}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { Alert, KeyboardAvoidingView, Text, TextInput, View } from "react-native";
-import { colors } from "../../styles/colors";
+import { colors } from "../../styles/const";
 import { ButtonInterface } from "../../components/ButtonAuth";
 import { IMessage } from "../../services/data/Chat";
 import { useAuth } from "../../hook/auth";

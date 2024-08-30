@@ -27,9 +27,6 @@ export function useProfileData() {
     };
 
     // Chama a função para obter os dados ao montar o componente
-    useEffect(() => {
-        getData();
-    }, []);
-    //console.log('data:', data)
+    
     return { data, getData };
 }

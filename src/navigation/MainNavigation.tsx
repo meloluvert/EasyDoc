@@ -5,7 +5,7 @@ import { Profile } from "../screens/Profile";
 import { Chat } from "../screens/Chat";
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from "../styles/colors";
+import { colors } from "../styles/const";
 import { LoginTypes } from "./AuthNavigation";
 import Entypo from '@expo/vector-icons/Entypo';
 import { MessageNavigation } from "./messageNavigation";

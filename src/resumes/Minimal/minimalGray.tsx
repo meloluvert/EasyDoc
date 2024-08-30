@@ -1,11 +1,9 @@
 ﻿
 import { css } from "./css"
 import { useEffect } from "react";
-import {useProfileData} from '../../services/data/Resume/index'
 import { IResume } from "../../screens/Profile";
 export function renderMinimal(data:IResume){
-
-    console.log('a')
+    console.log('Gerando Minimal Gray')
     const minimalGray = `
     ${css}
     
@@ -96,8 +94,7 @@ export function renderMinimal(data:IResume){
                     <section>
                         <section class="summary">
                             <h6>Summary</h6>
-                            <p>Deadline-oriented software engineer with lots of experience.
-                                Solid track record of architecting solutions that exceed client expectations.</p>
+                            <p>${data?.desc}</p>
                         </section>
                         <section class="experience">
                             <h6>Experience</h6>

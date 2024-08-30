@@ -4,7 +4,7 @@ import { stylesInitial } from "../../styles/InitialPages";
 import { pagesArray } from "../../screens/InitialPages/pagesArray";
 import { stylesButtons } from "./styles";
 import { Dispatch, SetStateAction } from "react";
-import { colors } from "../../styles/colors";
+import { colors } from "../../styles/const";
 import { StyleSheet } from "react-native";
 
 interface ButtonsProps {

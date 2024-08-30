@@ -1,3 +1,3 @@
-import { minimalGray } from "./Minimal/minimal";
+import { minimalGray } from "./Minimal/minimalGray";
 import { orangeWhite } from "./OrangeWhite/orangeWhite";
 export {minimalGray,orangeWhite}

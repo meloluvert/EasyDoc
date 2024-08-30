@@ -4,11 +4,11 @@ import { css } from "./css"
 import { useEffect } from "react";
 import {useProfileData} from '../../services/data/Resume/index'
 import { IResume } from "../../screens/Profile";
-export function renderOrange(data:IResume){
+export function renderOrangeWhite(data:IResume){
 
-    console.log('a')
+	console.log('Gerando Orange White')
 	const  orangeWhite = `
-
+${css}
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -21,15 +21,15 @@ export function renderOrange(data:IResume){
 		</div>
 		
 		<div id="name">
-			<h1 class="quickFade delayTwo">Joe Bloggs</h1>
+			<h1 class="quickFade delayTwo">${data?.name}</h1>
 			<h2 class="quickFade delayThree">Job Title</h2>
 		</div>
 		
 		<div id="contactDetails" class="quickFade delayFour">
 			<ul>
-				<li>e: <a href="mailto:joe@bloggs.com" target="_blank">joe@bloggs.com</a></li>
+				<li>e: <a href="mailto:${data?.email}" target="_blank">${data?.email}</a></li>
 				<li>w: <a href="http://www.bloggs.com">www.bloggs.com</a></li>
-				<li>m: 01234567890</li>
+				<li>m: ${data?.telefone}</li>
 			</ul>
 		</div>
 		<div class="clear"></div>
@@ -43,7 +43,7 @@ export function renderOrange(data:IResume){
 				</div>
 				
 				<div class="sectionContent">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dolor metus, interdum at scelerisque in, porta at lacus. Maecenas dapibus luctus cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim. Vestibulum bibendum mattis dignissim. Proin id sapien quis libero interdum porttitor.</p>
+					<p>${data?.desc}</p>
 				</div>
 			</article>
 			<div class="clear"></div>
@@ -134,4 +134,5 @@ pageTracker._trackPageview();
 </body>
 </html>
 `
+return orangeWhite
 }

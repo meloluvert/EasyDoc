@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { printToFileAsync } from "expo-print";
 import { shareAsync } from "expo-sharing";
-import { ImageBackground, TouchableOpacity } from "react-native";
+import { ImageBackground, ImageSourcePropType, TouchableOpacity } from "react-native";
 import { View, Text, Image } from "react-native";
 import { styles } from "./styles";
 
@@ -9,9 +9,10 @@ export interface ICard {
     item: {
         name: string,
         template: string,
-        colorBg: string
+        colorBg: string,
+        img: ImageSourcePropType
     },
-    generatePdf: (template: string) => Promise<string>
+    generatePdf: (template: string) => Promise<string | void >
 }
 
 export function CardResume({ item, generatePdf }: ICard) {
@@ -24,20 +25,15 @@ export function CardResume({ item, generatePdf }: ICard) {
         });
         await shareAsync(file.uri);
     };
-    const [adressImage, setAdress] = useState("")
-useEffect(()=>
-    {
-        setAdress(`../../assets/Resumes/${item.template}.jpeg`)
-    },[]
-)
-    
 
+    
     return (
-       <ImageBackground style={styles.card} source={require(adressImage)}>
-            <TouchableOpacity style={[{backgroundColor:item.colorBg}, styles.btn]} onPress={handlePress}>
+       
+            <TouchableOpacity style={[{backgroundColor:item.colorBg}, styles.card]} onPress={handlePress}>
+                <Image style={styles.back} source={item.img}/>
                 <Text style={styles.title}>{item.name}</Text>
             </TouchableOpacity>
-        </ImageBackground>
+        
        
     );
 }

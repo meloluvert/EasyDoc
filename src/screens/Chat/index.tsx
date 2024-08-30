@@ -7,7 +7,7 @@ import { IMessage, IResponseChat } from "../../services/data/Chat";
 import { useAuth } from "../../hook/auth";
 import { MessageTypes } from "../../navigation/messageNavigation";
 import { AntDesign } from "@expo/vector-icons";
-import { colors } from "../../styles/colors";
+import { colors } from "../../styles/const";
 export function Chat({navigation}:MessageTypes) {
     const [message, setMessage] = useState<IResponseChat[]>([])
     const { setLoading } = useAuth()

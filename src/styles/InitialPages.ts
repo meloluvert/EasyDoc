@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native'
-import { colors } from './colors'
+import { colors } from './const'
 export const stylesInitial = StyleSheet.create({
     //para as duas páginas
     container: {

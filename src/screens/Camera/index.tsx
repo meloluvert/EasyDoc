@@ -2,7 +2,7 @@ import { CameraView, CameraType, useCameraPermissions, CameraCapturedPicture } f
 import { useRef, useState } from 'react';
 import { Button, Text, TouchableOpacity, View, Alert, ImageBackground } from 'react-native';
 // import {styles} from './styles'
-import { colors } from '../../styles/colors';
+import { colors } from '../../styles/const';
 import { AntDesign } from '@expo/vector-icons';
 import * as MediaLibrary from 'expo-media-library';
 import { Loading } from '../../components/Loading';

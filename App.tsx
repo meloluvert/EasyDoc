@@ -22,7 +22,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null
   }
-
+{/* Podemos controlar isso com async storage em uma atualização futura */}
   if (page == 0 || page == 1) {
     return (
       <InitialPage page={page} setPage={setPage} />
