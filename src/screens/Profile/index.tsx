@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, TextInput, Button, SafeAreaView } from "react-native";
+import { View, Text, TextInput, Button, SafeAreaView, ImageBackground } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hook/auth";
@@ -11,6 +11,10 @@ import { ProfileTypes } from "../../navigation/profileNavigation";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { TouchableOpacity } from "react-native";
 import { colors } from "../../styles/const";
+import { consts } from "../../styles/const";
+import { ProfileStackParamList } from "../../navigation/profileNavigation";
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { Image } from "react-native";
 export interface IResume {
     name?: string;
     email?: string;
@@ -18,10 +22,13 @@ export interface IResume {
     telefone?: string;
     desc?: string;
 }
-
-export function Profile({ navigation }: ProfileTypes) {
+type ProfileRouteProp = RouteProp<ProfileStackParamList, 'Profile'>;
+export function Profile({ navigation, route}: ProfileTypes) {
     const [data, setData] = useState<IResume>({ name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Inicializa com um objeto vazio ou com dados padrão
     const { user, signOut } = useAuth();
+    
+    const { imgUrl } = route.params || {}; // Recebe o parâmetro imgUrl
+    console.log(route.params)
     useEffect(() => {
         // Função assíncrona para buscar dados do AsyncStorage ao carregar a tela
         const getData = async () => {
@@ -92,22 +99,32 @@ export function Profile({ navigation }: ProfileTypes) {
         setData(prevData => ({ ...prevData, ...item })); // Atualiza o estado local conforme o usuário digita
     };
 
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={formStyles.container} contentContainerStyle={formStyles.content}>
                 <Text style={formStyles.formInput}>Os seus dados ficarão armazenados localmente, ou seja, se logar em outro celular com a mesma contra, seus dados NÃO serão recuperados</Text>
-                
-                <TouchableOpacity style={[formStyles.btn, { width: 50 }]} onPress={() => navigation.navigate('Adicionar Foto')}>
+                <View style={formStyles.addImg}>
+                    <Image source={{ uri: imgUrl }} style={formStyles.img} />
+                        
+                    <TouchableOpacity style={[formStyles.btn, {
+                            width: 50, position: 'absolute',
+                            top:consts.widthPhoto-60,
+                            right: 0
+                        }]} onPress={() => navigation.navigate('Adicionar Foto')}>
                             <MaterialIcons name="add-photo-alternate" size={20} color={colors.white} />
                         </TouchableOpacity>
+                </View> 
+
+
                 <View style={[formStyles.formInput]}>
                     <Text style={formStyles.label}>Nome</Text>
-                        <TextInput
-                            placeholder=' João Silva'
-                            style={formStyles.TextInp}
-                            value={data.name}
-                            onChangeText={(text) => handleChange({ name: text })}
-                        />
+                    <TextInput
+                        placeholder=' João Silva'
+                        style={formStyles.TextInp}
+                        value={data.name}
+                        onChangeText={(text) => handleChange({ name: text })}
+                    />
                 </View>
 
                 <View style={formStyles.formInput}>

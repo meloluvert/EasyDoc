@@ -10,6 +10,18 @@ export const formStyles = StyleSheet.create({
         //overflow:'scroll',
         marginBottom:20,
     },
+    addImg:{
+        backgroundColor:'#ccc',
+        width:consts.widthPhoto,
+        height:consts.widthPhoto,
+        borderRadius:0.5*consts.widthPhoto,
+        marginVertical:10
+    }
+    ,
+    img:{
+        flex:1,
+        borderRadius:0.5*consts.widthPhoto,
+    },
     content:{
         alignItems:'center',
         paddingBottom:50
@@ -43,7 +55,8 @@ export const formStyles = StyleSheet.create({
         borderRadius:5,
         padding: 15,
         width:consts.widthForm,
-        marginVertical:5
+        marginVertical:5,
+        
     }
         
 })

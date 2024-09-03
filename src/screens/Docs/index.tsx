@@ -6,9 +6,9 @@ import { renderMinimal } from "../../resumes/Minimal/minimalGray";
 import { orangeWhite } from "../../resumes/index";
 import { renderOrangeWhite } from "../../resumes/OrangeWhite/orangeWhite";
 
-
+import { useAuth } from "../../hook/auth";
 export function Docs() {
-   
+
     
     const { data: dados, getData } = useProfileData();
     const generatePdf = async (template: string) => {

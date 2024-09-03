@@ -4,5 +4,6 @@ export const colors = {
     white:'#fff'
 }
 export const consts = {
-    widthForm:350
+    widthForm:350,
+    widthPhoto:140
 }

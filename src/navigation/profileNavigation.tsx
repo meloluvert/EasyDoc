@@ -4,8 +4,8 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import { Profile } from '../screens/Profile';
 import { Camera } from '../screens/Camera';
 import { Imagens } from '../screens/Images';
-type ProfileStackParamList = {
-    Profile: undefined
+export type ProfileStackParamList = {
+    Profile: {imgUrl: string | null}
     "Adicionar Foto": undefined
     "Câmera": undefined
 }

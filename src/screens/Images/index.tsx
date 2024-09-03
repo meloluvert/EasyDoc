@@ -30,6 +30,7 @@ export function Imagens({navigation}:ProfileTypes) {
         console.log(result);
         if (!result.canceled) {
             setImage(result.assets[0].uri);
+            navigation.navigate('Profile', {imgUrl: result.assets[0].uri})
         }
     }
     return (
