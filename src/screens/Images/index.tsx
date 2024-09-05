@@ -12,7 +12,7 @@ export function Imagens({navigation}:ProfileTypes) {
     const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
     const [image, setImage] = useState<string | null>(null);
     async function getAlbums() {
-        if (permissionResponse && permissionResponse.status !== 'granted') {
+        if (permissionResponse && permissionResponse.status !== 'granted' && permissionResponse.accessPrivileges !== 'all') {
             await requestPermission();
         }
         const fetchedAlbums = await MediaLibrary.getAlbumsAsync({
@@ -37,14 +37,15 @@ export function Imagens({navigation}:ProfileTypes) {
         <>
             <ButtonInterface onPressI={pickImage} title='Abrir Imagem' type='secondary' />
             <ButtonInterface title='Camera' onPressI={()=> navigation.navigate("Câmera")} type='primary'/>
+            <ButtonInterface title='QrCode' onPressI={()=> navigation.navigate("QrCode")} type='primary'/>
             <View style={styles.containerImage} >
                 {image && <Image source={{ uri: image }} style={styles.image} />}
             </View >
-            {/* <ButtonInterface onPressI={getAlbums} title='Buscar Albuns' type='primary' /> */}
-            {/* <ScrollView>
+             <ButtonInterface onPressI={getAlbums} title='Buscar Albuns' type='primary' /> 
+            <ScrollView>
                 {albums && albums.map((album) => <Album album={album} />)}
 
-            </ScrollView > */}
+            </ScrollView > 
         </>
     );
 }

@@ -28,7 +28,6 @@ export function Profile({ navigation, route}: ProfileTypes) {
     const { user, signOut } = useAuth();
     
     const { imgUrl } = route.params || {}; // Recebe o parâmetro imgUrl
-    console.log(route.params)
     useEffect(() => {
         // Função assíncrona para buscar dados do AsyncStorage ao carregar a tela
         const getData = async () => {
@@ -105,8 +104,8 @@ export function Profile({ navigation, route}: ProfileTypes) {
             <ScrollView style={formStyles.container} contentContainerStyle={formStyles.content}>
                 <Text style={formStyles.formInput}>Os seus dados ficarão armazenados localmente, ou seja, se logar em outro celular com a mesma contra, seus dados NÃO serão recuperados</Text>
                 <View style={formStyles.addImg}>
-                    <Image source={{ uri: imgUrl }} style={formStyles.img} />
-                        
+                    {imgUrl ? <Image source={{ uri: imgUrl }} style={formStyles.img} /> : <View source={{ uri: imgUrl }} style={formStyles.img} />}
+    
                     <TouchableOpacity style={[formStyles.btn, {
                             width: 50, position: 'absolute',
                             top:consts.widthPhoto-60,

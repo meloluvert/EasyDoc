@@ -11,7 +11,11 @@ export function Album({ album }: IAlbum) {
     const [assets, setAssets] = useState<MediaLibrary.Asset[]>([]);
     useEffect(() => {
         async function getAlbumAssets() {
+
             const albumAssets =  await MediaLibrary.getAssetsAsync({album});
+            if(album.title == "EasyDoc"){
+                console.log(albumAssets)
+            }
     setAssets(albumAssets.assets);
 }
 getAlbumAssets();

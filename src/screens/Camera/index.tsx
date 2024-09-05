@@ -41,7 +41,8 @@ export function Camera({navigation}: ProfileTypes) {
             await requestPermissionMedia();
         }
         const asset = await MediaLibrary.createAssetAsync(photo!.uri)
-        MediaLibrary.createAlbumAsync("Images", asset, false)
+        
+        MediaLibrary.createAlbumAsync("EasyDoc", asset, false)
         Alert.alert("Imagem salva com sucesso!")
 
     }
@@ -64,7 +65,7 @@ export function Camera({navigation}: ProfileTypes) {
         <View style={styles.container} >
             <CameraView style={styles.camera} facing={facing} ref={ref}>
                 <View style={styles.headerCamera}>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile', {imgUrl: null})}>
                         <AntDesign name="back" size={70} color={colors.primary}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={toggleCameraFacing}>

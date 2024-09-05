@@ -17,7 +17,7 @@ ${css}
 <div id="cv" class="instaFade">
 	<div class="mainDetails">
 		<div id="headshot" class="quickFade">
-			<img src="headshot.jpg" alt="Alan Smith" />
+			<img src="file:///storage/emulated/0/Pictures/EasyDoc/9c28720f-ae63-4610-a207-f5c5cbe24c2b.jpg" alt="Alan Smith" />
 		</div>
 		
 		<div id="name">
