@@ -6,37 +6,55 @@ import { renderMinimal } from "../../resumes/Minimal/minimalGray";
 import { renderOrangeWhite } from "../../resumes/OrangeWhite/orangeWhite";
 import { ButtonInterface } from "../../components/ButtonAuth";
 import * as SQLite from 'expo-sqlite';
+import { IResume } from "../Profile";
 
 export function Docs() {
 
     //testando sqlite
     async function getSqlData() {
+        const dados = await getData();
+        // Abre o banco de dados SQLite
+        const db = await SQLite.openDatabaseAsync('EasyDoc');
 
-        const db = await SQLite.openDatabaseAsync('databaseName');
+        // Executa o comando para remover a tabela, caso ela exista
+        await db.execAsync(`DROP TABLE IF EXISTS user;`);
+
+        // Configura o modo de journal do banco de dados e cria a tabela, se não existir
         await db.execAsync(`
-DROP TABLE IF EXISTS test;`)
+            PRAGMA journal_mode = WAL;
+            CREATE TABLE IF NOT EXISTS user(
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                name TEXT,
+                email TEXT,
+                dtNasc TEXT,
+                telefone TEXT,
+                desc TEXT
+            );
+        `);
+
+        // Insere dados na tabela user, utilizando os valores fornecidos pela interface IResume
         await db.execAsync(`
-PRAGMA journal_mode = WAL;
-CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY NOT NULL, value TEXT NOT NULL, intValue INTEGER);
-INSERT INTO test (value, intValue) VALUES ('test1', 123);
-INSERT INTO test (value, intValue) VALUES ('test2', 456);
-INSERT INTO test (value, intValue) VALUES ('test3', 789);
-`);
+            INSERT INTO user (name, email, dtNasc, telefone, desc)
+            VALUES ('${dados.name}', '${dados.email}', '${dados.dtNasc}', '${dados.telefone}', '${dados.desc}');
+        `);
+
 
         // `runAsync()` is useful when you want to execute some write operations.
-        const results = await db.getAllAsync('SELECT * FROM test');
-        console.log(results);
+        const results = await db.getAllAsync('SELECT * FROM user');
+        console.log(results)
     }
     const { getData } = useProfileData();
 
     const generatePdf = async (template: string) => {
-        const dados = await getData(); // Aguarda a obtenção dos dados atualizados
 
+        // const dados = await getData(); // Aguarda a obtenção dos dados atualizados
+        const db = await SQLite.openDatabaseAsync('EasyDoc');
+        const dados = await db.getAllAsync('SELECT * FROM user');
         switch (template) {
             case 'MinimalGray':
-                return renderMinimal(dados);
+                return renderMinimal(dados[0]);
             case 'OrangeWhite':
-                return renderOrangeWhite(dados);
+                return renderOrangeWhite(dados[0]);
             default:
                 break;
         }
@@ -67,7 +85,7 @@ INSERT INTO test (value, intValue) VALUES ('test3', 789);
                 keyExtractor={(item) => String(item.id)}
                 horizontal={true}
             />
-            <ButtonInterface onPressI={getSqlData} title='hello'/>
+            <ButtonInterface type="primary" onPressI={() => getSqlData()} title='teste SQLite' /> 
         </View>
     );
 }

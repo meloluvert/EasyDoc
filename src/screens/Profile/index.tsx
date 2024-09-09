@@ -15,6 +15,7 @@ import { consts } from "../../styles/const";
 import { ProfileStackParamList } from "../../navigation/profileNavigation";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { Image } from "react-native";
+import { Alert } from "react-native";
 export interface IResume {
     name?: string;
     email?: string;
@@ -73,7 +74,7 @@ export function Profile({ navigation, route}: ProfileTypes) {
             await AsyncStorage.setItem('telefone', data.telefone || '');
             await AsyncStorage.setItem('desc', data.desc || '');
             console.log(data)
-            console.log('Dados salvos com sucesso!');
+            Alert.alert('Dados salvos com sucesso')
         } catch (e) {
             console.error('Erro ao salvar dados:', e);
         }
