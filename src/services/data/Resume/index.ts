@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export interface IResume {
@@ -10,7 +10,13 @@ export interface IResume {
 }
 
 export function useProfileData() {
-    const [data, setData] = useState<IResume>({ name: '', email: '', dtNasc: '', telefone: '', desc: '' });
+    const [data, setData] = useState<IResume>({
+        name: '',
+        email: '',
+        dtNasc: '',
+        telefone: '',
+        desc: ''
+    });
 
     const getData = async () => {
         try {
@@ -20,13 +26,20 @@ export function useProfileData() {
             const telefone = await AsyncStorage.getItem('telefone');
             const desc = await AsyncStorage.getItem('desc');
 
-                setData({ name: nome, email: email,dtNasc:dtNasc, telefone: telefone, desc:desc });
+            const fetchedData = {
+                name: nome || '',
+                email: email || '',
+                dtNasc: dtNasc || '',
+                telefone: telefone || '',
+                desc: desc || ''
+            };
+
+            setData(fetchedData); // Atualiza o estado com os dados recuperados
+            return fetchedData; // Retorna os dados para uso imediato
         } catch (error) {
             console.error('Erro ao obter dados do AsyncStorage:', error);
         }
     };
 
-    // Chama a função para obter os dados ao montar o componente
-    
     return { data, getData };
 }

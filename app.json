@@ -50,7 +50,8 @@
         {
           "photosPermission": "O aplicativo acessa suas fotos para colocá-las no currículo"
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "extra": {
       "eas": {

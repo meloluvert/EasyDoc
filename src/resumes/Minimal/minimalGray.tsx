@@ -2,7 +2,7 @@
 import { css } from "./css"
 import { useEffect } from "react";
 import { IResume } from "../../screens/Profile";
-export function renderMinimal(data:IResume){
+export function renderMinimal(data:IResume  | undefined){
     console.log('Gerando Minimal Gray')
     const minimalGray = `
     ${css}
