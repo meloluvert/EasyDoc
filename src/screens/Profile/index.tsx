@@ -25,12 +25,12 @@ export interface IResume {
     desc?: string;
 }
 type ProfileRouteProp = RouteProp<ProfileStackParamList, 'Profile'>;
-export function Profile({ navigation, route}: ProfileTypes) {
+export function Profile({ navigation, route }: ProfileTypes) {
     const [data, setData] = useState<IResume>({ name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Inicializa com um objeto vazio ou com dados padrão
     const { user, signOut } = useAuth();
-    
+
     const { imgUrl } = route.params || {}; // Recebe o parâmetro imgUrl
-    console.log('o que foi passado:',imgUrl)
+    console.log('o que foi passado:', imgUrl)
     useEffect(() => {
         // Função assíncrona para buscar dados do AsyncStorage ao carregar a tela
         const getData = async () => {
@@ -70,16 +70,23 @@ export function Profile({ navigation, route}: ProfileTypes) {
 
     const storeData = async () => {
         try {
-            await AsyncStorage.setItem('nome', data.name || ''); // Salva o nome no AsyncStorage
-            await AsyncStorage.setItem('email', data.email || '');
-            await AsyncStorage.setItem('dtNasc', data.dtNasc || '');
-            await AsyncStorage.setItem('telefone', data.telefone || '');
-            await AsyncStorage.setItem('desc', data.desc || '');
+            // await AsyncStorage.setItem('nome', data.name || ''); // Salva o nome no AsyncStorage
+            // await AsyncStorage.setItem('email', data.email || '');
+            // await AsyncStorage.setItem('dtNasc', data.dtNasc || '');
+            // await AsyncStorage.setItem('telefone', data.telefone || '');
+            // await AsyncStorage.setItem('desc', data.desc || '');
 
-            /*const db = await SQLite.openDatabaseAsync('EasyDoc');*/
-            /*await db.runAsync(`UPDATE user SET name = ${data.name} WHERE id = 1`);*/
-
-            console.log(data)
+            const db = await SQLite.openDatabaseAsync('EasyDoc');
+            await db.runAsync(`
+        UPDATE user 
+        SET name = "${data.name}",
+            email = "${data.email}",
+            dtNasc = "${data.dtNasc}",
+            telefone = "${data.telefone}",
+            desc = "${data.desc}"
+        WHERE id = 1;
+    `);
+            console.log(await db.getAllAsync('SELECT * FROM user'))
             Alert.alert('Dados salvos com sucesso')
         } catch (e) {
             console.error('Erro ao salvar dados:', e);
@@ -112,15 +119,15 @@ export function Profile({ navigation, route}: ProfileTypes) {
                 <Text style={formStyles.formInput}>Os seus dados ficarão armazenados localmente, ou seja, se logar em outro celular com a mesma contra, seus dados NÃO serão recuperados</Text>
                 <View style={formStyles.addImg}>
                     {imgUrl ? <Image source={{ uri: imgUrl }} style={formStyles.img} /> : <View style={formStyles.img} />}
-    
+
                     <TouchableOpacity style={[formStyles.btn, {
-                            width: 50, position: 'absolute',
-                            top:consts.widthPhoto-60,
-                            right: 0
-                        }]} onPress={() => navigation.navigate('Adicionar Foto')}>
-                            <MaterialIcons name="add-photo-alternate" size={20} color={colors.white} />
-                        </TouchableOpacity>
-                </View> 
+                        width: 50, position: 'absolute',
+                        top: consts.widthPhoto - 60,
+                        right: 0
+                    }]} onPress={() => navigation.navigate('Adicionar Foto')}>
+                        <MaterialIcons name="add-photo-alternate" size={20} color={colors.white} />
+                    </TouchableOpacity>
+                </View>
 
 
                 <View style={[formStyles.formInput]}>

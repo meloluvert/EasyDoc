@@ -48,7 +48,7 @@ export function Docs() {
     const generatePdf = async (template: string) => {
 
         const dados = await getData(); // Aguarda a obtenção dos dados atualizados
-        //const db = await SQLite.openDatabaseAsync('EasyDoc');
+        /*const db = await SQLite.openDatabaseAsync('EasyDoc');
         /*const dados = await db.getAllAsync('SELECT * FROM user');*/
         switch (template) {
             case 'MinimalGray':
@@ -85,7 +85,7 @@ export function Docs() {
                 keyExtractor={(item) => String(item.id)}
                 horizontal={true}
             />
-            {/* <ButtonInterface type="primary" onPressI={getSqlData} title='teste SQLite' />  */}
+            <ButtonInterface type="primary" onPressI={getSqlData} title='teste SQLite' />  
         </View>
     );
 }

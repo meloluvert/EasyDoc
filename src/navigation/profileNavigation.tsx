@@ -13,6 +13,7 @@ export type ProfileStackParamList = {
 type ProfileScreenNavigationProp = StackNavigationProp<ProfileStackParamList, 'Profile'>
 export type ProfileTypes = {
     navigation: ProfileScreenNavigationProp
+    route: any
 }
 export function ProfileNavigation() {
     const Stack = createStackNavigator<ProfileStackParamList>()
