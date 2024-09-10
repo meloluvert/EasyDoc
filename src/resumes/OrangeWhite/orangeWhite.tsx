@@ -1,14 +1,13 @@
 
 
 import { css } from "./css"
-import { useEffect } from "react";
-import {useProfileData} from '../../services/data/Resume/index'
 import { Asset } from "expo-asset";
 import { manipulateAsync } from "expo-image-manipulator";
-import { IResume } from "../../screens/Profile";
+import { IResume } from "../../services/data/Resume/index";
 export async function renderOrangeWhite(data:IResume | undefined){
 	console.log(data)
-	const asset = Asset.fromModule('file:///storage/emulated/0/Pictures/EasyDoc/9c28720f-ae63-4610-a207-f5c5cbe24c2b.jpg');
+	const asset = Asset.fromModule(data.photoAdress);
+	console.log('photo:',data.photoAdress)
 	const image = await manipulateAsync(asset.localUri ?? asset.uri, [], { base64: true });
 	console.log('Gerando Orange White')
 	const  orangeWhite = `
@@ -21,7 +20,7 @@ ${css}
 <div id="cv" class="instaFade">
 	<div class="mainDetails">
 		<div id="headshot" class="quickFade">
-			<img src="data:image/jpeg;base64,${image.base64}" alt="Alan Smith" />
+		<img src="data:image/jpeg;base64,${image.base64}" alt="Alan Smith" />
 		</div>
 		
 		<div id="name">

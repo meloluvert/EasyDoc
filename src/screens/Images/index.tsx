@@ -31,6 +31,7 @@ async function getAlbums() {
     setAlbums(fetchedAlbums);
 }
 
+    const [permissionMedia, requestPermissionMedia] = MediaLibrary.usePermissions();
 // Função assíncrona para selecionar uma imagem da biblioteca de fotos.
 async function pickImage() {
     // Abre a galeria de imagens e permite selecionar qualquer tipo de mídia, com a opção de editar.
@@ -41,13 +42,26 @@ async function pickImage() {
         quality: 1, // Define a qualidade máxima para a imagem selecionada.
     });
     
-    console.log(result); // Exibe o resultado da seleção da imagem no console.
+    console.log("foto:",result); // Exibe o resultado da seleção da imagem no console.
     
     // Se o usuário não cancelou a seleção, atualiza o estado "image" com o URI da imagem escolhida.
     if (!result.canceled) {
         setImage(result.assets[0].uri); // Salva o URI da imagem no estado.
         // Navega para a tela 'Profile' passando o URI da imagem como parâmetro.
-        navigation.navigate('Profile', {imgUrl: result.assets[0].uri});
+
+        if (permissionMedia!.status !== 'granted') {
+            await requestPermissionMedia();
+        }
+        // Cria um "asset" na Media Library com a URI da foto capturada.
+        const asset = await MediaLibrary.createAssetAsync(result.assets[0].uri);
+
+        // Cria um álbum chamado "EasyDoc" na galeria e salva o asset lá.
+        MediaLibrary.createAlbumAsync("EasyDoc", asset, false);
+        //criando o endereço compelto da imagem salva
+        const endImg:string = "file:///storage/emulated/0/Pictures/EasyDoc/" + asset.filename
+        console.log("uri imagem salva:", endImg)
+        navigation.navigate('Profile', { imgUrl: endImg})
+
     }
 }
 
@@ -56,7 +70,7 @@ async function pickImage() {
         <>
             <ButtonInterface onPressI={pickImage} title='Abrir Imagem' type='secondary' />
             <ButtonInterface title='Camera' onPressI={()=> navigation.navigate("Câmera")} type='primary'/>
-            <ButtonInterface title='QrCode' onPressI={()=> navigation.navigate("QrCode")} type='primary'/>
+            
             <View style={styles.containerImage} >
                 {image && <Image source={{ uri: image }} style={styles.image} />}
                 

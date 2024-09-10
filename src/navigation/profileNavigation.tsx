@@ -8,7 +8,7 @@ export type ProfileStackParamList = {
     Profile: {imgUrl: string | null}
     "Adicionar Foto": undefined
     "Câmera": undefined
-    "QrCode": undefined
+    "QrCode": {whatsAppNumber: string | null}
 }
 type ProfileScreenNavigationProp = StackNavigationProp<ProfileStackParamList, 'Profile'>
 export type ProfileTypes = {

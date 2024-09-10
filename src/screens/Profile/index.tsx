@@ -17,47 +17,21 @@ import { useRoute, RouteProp } from "@react-navigation/native";
 import { Image } from "react-native";
 import { Alert } from "react-native";
 import * as SQLite from 'expo-sqlite';
-export interface IResume {
-    name?: string;
-    email?: string;
-    dtNasc?: string;
-    telefone?: string;
-    desc?: string;
-}
+import { IResume } from "../../services/data/Resume";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 type ProfileRouteProp = RouteProp<ProfileStackParamList, 'Profile'>;
 export function Profile({ navigation, route }: ProfileTypes) {
     const [data, setData] = useState<IResume>({ name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Inicializa com um objeto vazio ou com dados padrão
     const { user, signOut } = useAuth();
 
     const { imgUrl } = route.params || {}; // Recebe o parâmetro imgUrl
-    console.log('o que foi passado:', imgUrl)
+    // console.log('o que foi passado:', imgUrl)
     useEffect(() => {
-        // Função assíncrona para buscar dados do AsyncStorage ao carregar a tela
         const getData = async () => {
             try {
-                const nome = await AsyncStorage.getItem('nome');
-                const email = await AsyncStorage.getItem('email')
-                const dtNasc = await AsyncStorage.getItem('dtNasc')
-                const telefone = await AsyncStorage.getItem('telefone')
-                const desc = await AsyncStorage.getItem('desc')
-
-
-
-                if (nome !== null) {
-                    setData(prevData => ({ ...prevData, name: nome })); // Atualiza apenas o campo 'name'
-                }
-                if (email !== null) {
-                    setData(prevData => ({ ...prevData, email: email })); // Atualiza apenas o campo 'name'
-                }
-                if (dtNasc !== null) {
-                    setData(prevData => ({ ...prevData, dtNasc: dtNasc })); // Atualiza apenas o campo 'name'
-                }
-                if (telefone !== null) {
-                    setData(prevData => ({ ...prevData, telefone: telefone })); // Atualiza apenas o campo 'name'
-                } if (desc !== null) {
-                    setData(prevData => ({ ...prevData, desc: desc })); // Atualiza apenas o campo 'name'
-                }
-
+                const db = await SQLite.openDatabaseAsync('EasyDoc'); 
+                const result:IResume[] = await db.getAllAsync('SELECT * FROM user')
+                setData(result[0])
 
 
             } catch (e) {
@@ -65,29 +39,51 @@ export function Profile({ navigation, route }: ProfileTypes) {
             }
         };
 
-        getData(); // Chama a função ao carregar a tela
-    }, []); // Dependência vazia para executar apenas uma vez ao montar o componente
-
+    }, []); 
+    
     const storeData = async () => {
         try {
-            // await AsyncStorage.setItem('nome', data.name || ''); // Salva o nome no AsyncStorage
-            // await AsyncStorage.setItem('email', data.email || '');
-            // await AsyncStorage.setItem('dtNasc', data.dtNasc || '');
-            // await AsyncStorage.setItem('telefone', data.telefone || '');
-            // await AsyncStorage.setItem('desc', data.desc || '');
+            const db = await SQLite.openDatabaseAsync('EasyDoc'); 
+           await db.execAsync(`
+            CREATE TABLE IF NOT EXISTS user(
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                name TEXT,
+                email TEXT,
+                dtNasc TEXT,
+                telefone TEXT,
+                desc TEXT,
+                photoAdress TEXT
+            );
+        `);
 
-            const db = await SQLite.openDatabaseAsync('EasyDoc');
-            await db.runAsync(`
-        UPDATE user 
-        SET name = "${data.name}",
-            email = "${data.email}",
-            dtNasc = "${data.dtNasc}",
-            telefone = "${data.telefone}",
-            desc = "${data.desc}"
-        WHERE id = 1;
-    `);
+          let contador : number = 0
+          await db.withTransactionAsync(async () => {
+            const result : any = await db.getFirstAsync('SELECT COUNT(*) FROM user');
+            contador = result['COUNT(*)']
+            console.log("quantidade:", contador)
+          });
+
+            if (contador != 0) {
+                await db.runAsync(`
+            UPDATE user 
+            SET name = "${data.name}",
+                email = "${data.email}",
+                dtNasc = "${data.dtNasc}",
+                telefone = "${data.telefone}",
+                desc = "${data.desc}",
+                photoAdress = "${imgUrl}"
+            WHERE id = 1;
+        `);
+            } else {
+               await db.execAsync(`
+            INSERT INTO user (name, email, dtNasc, telefone, desc, photoAdress)
+            VALUES ("${data.name}", "${data.email}", "${data.dtNasc}", "${data.telefone}", "${data.desc}", "${imgUrl ? imgUrl : ' ' }");
+        `);
+            }
+
             console.log(await db.getAllAsync('SELECT * FROM user'))
             Alert.alert('Dados salvos com sucesso')
+            
         } catch (e) {
             console.error('Erro ao salvar dados:', e);
         }
@@ -95,12 +91,10 @@ export function Profile({ navigation, route }: ProfileTypes) {
 
     const removeData = async () => {
         try {
-            await AsyncStorage.removeItem('nome'); // Remove o nome do AsyncStorage
-            await AsyncStorage.removeItem('email');
-            await AsyncStorage.removeItem('dtNasc');
-            await AsyncStorage.removeItem('telefone');
-            await AsyncStorage.removeItem('desc');
 
+            const db = await SQLite.openDatabaseAsync('EasyDoc'); 
+            await db.execAsync(`
+            DROP TABLE IF EXISTS user;`);
             setData({ ...data, name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Limpa o campo 'name' no estado local
             console.log('Dados removidos com sucesso!');
         } catch (e) {
@@ -127,9 +121,17 @@ export function Profile({ navigation, route }: ProfileTypes) {
                     }]} onPress={() => navigation.navigate('Adicionar Foto')}>
                         <MaterialIcons name="add-photo-alternate" size={20} color={colors.white} />
                     </TouchableOpacity>
+                    
                 </View>
-
-
+                
+                <TouchableOpacity style={[formStyles.btn, {
+                        position:'absolute',
+                        top:60,
+                        left:10,
+                        width:50
+                    }]} onPress={() => navigation.navigate("QrCode", {whatsAppNumber: data.telefone})}>
+<MaterialCommunityIcons name="qrcode-scan" size={20} color="white" />
+                    </TouchableOpacity>
                 <View style={[formStyles.formInput]}>
                     <Text style={formStyles.label}>Nome</Text>
                     <TextInput
