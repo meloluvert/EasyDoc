@@ -69,7 +69,10 @@ export function Camera({ navigation }: ProfileTypes) {
 
         // Cria um álbum chamado "EasyDoc" na galeria e salva o asset lá.
         MediaLibrary.createAlbumAsync("EasyDoc", asset, false);
-
+        //criando o endereço compelto da imagem salva
+        const endImg:string = "file:///storage/emulated/0/Pictures/EasyDoc/" + asset.filename
+        console.log("uri imagem salva:", endImg)
+        navigation.navigate('Profile', { imgUrl: endImg})
         // Exibe um alerta informando que a imagem foi salva com sucesso.
         Alert.alert("Imagem salva com sucesso!");
     }
@@ -92,7 +95,7 @@ export function Camera({ navigation }: ProfileTypes) {
         <View style={styles.container} >
             <CameraView style={styles.camera} facing={facing} ref={ref}>
                 <View style={styles.headerCamera}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Profile', { imgUrl: null })}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Profile', { imgUrl: null})}>
                         <AntDesign name="back" size={70} color={colors.primary} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={toggleCameraFacing}>

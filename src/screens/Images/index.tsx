@@ -59,6 +59,7 @@ async function pickImage() {
             <ButtonInterface title='QrCode' onPressI={()=> navigation.navigate("QrCode")} type='primary'/>
             <View style={styles.containerImage} >
                 {image && <Image source={{ uri: image }} style={styles.image} />}
+                
             </View >
              <ButtonInterface onPressI={getAlbums} title='Buscar Albuns' type='primary' /> 
             <ScrollView>

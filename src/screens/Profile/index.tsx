@@ -16,6 +16,7 @@ import { ProfileStackParamList } from "../../navigation/profileNavigation";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { Image } from "react-native";
 import { Alert } from "react-native";
+import * as SQLite from 'expo-sqlite';
 export interface IResume {
     name?: string;
     email?: string;
@@ -29,6 +30,7 @@ export function Profile({ navigation, route}: ProfileTypes) {
     const { user, signOut } = useAuth();
     
     const { imgUrl } = route.params || {}; // Recebe o parâmetro imgUrl
+    console.log('o que foi passado:',imgUrl)
     useEffect(() => {
         // Função assíncrona para buscar dados do AsyncStorage ao carregar a tela
         const getData = async () => {
@@ -73,6 +75,10 @@ export function Profile({ navigation, route}: ProfileTypes) {
             await AsyncStorage.setItem('dtNasc', data.dtNasc || '');
             await AsyncStorage.setItem('telefone', data.telefone || '');
             await AsyncStorage.setItem('desc', data.desc || '');
+
+            /*const db = await SQLite.openDatabaseAsync('EasyDoc');*/
+            /*await db.runAsync(`UPDATE user SET name = ${data.name} WHERE id = 1`);*/
+
             console.log(data)
             Alert.alert('Dados salvos com sucesso')
         } catch (e) {
@@ -105,7 +111,7 @@ export function Profile({ navigation, route}: ProfileTypes) {
             <ScrollView style={formStyles.container} contentContainerStyle={formStyles.content}>
                 <Text style={formStyles.formInput}>Os seus dados ficarão armazenados localmente, ou seja, se logar em outro celular com a mesma contra, seus dados NÃO serão recuperados</Text>
                 <View style={formStyles.addImg}>
-                    {imgUrl ? <Image source={{ uri: imgUrl }} style={formStyles.img} /> : <View source={{ uri: imgUrl }} style={formStyles.img} />}
+                    {imgUrl ? <Image source={{ uri: imgUrl }} style={formStyles.img} /> : <View style={formStyles.img} />}
     
                     <TouchableOpacity style={[formStyles.btn, {
                             width: 50, position: 'absolute',
