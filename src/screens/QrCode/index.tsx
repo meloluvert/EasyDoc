@@ -9,7 +9,6 @@ import { Loading } from "../../components/Loading";
 import { ProfileTypes } from "../../navigation/profileNavigation";
 import * as Linking from 'expo-linking';
 
-Linking.openURL('https://expo.dev');
 export function QrCode({ navigation, route }: ProfileTypes) {
     const { user } = useAuth()
     const [scanned, setScanned] = useState(false);
