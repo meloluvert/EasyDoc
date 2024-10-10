@@ -8,6 +8,7 @@ export interface IResume {
     telefone?: string;
     desc?: string;
     photoAdress?: string
+    endereco?:string
 }
 
 export function useProfileData() {

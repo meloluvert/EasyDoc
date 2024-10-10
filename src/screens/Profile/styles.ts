@@ -28,12 +28,13 @@ export const formStyles = StyleSheet.create({
     },
     label:{
         fontWeight:'bold',
+        
     }
     ,
 
     formInput:{
-        // width:consts.widthForm,
         flex:1,
+        width:"90%",
         backgroundColor:colors.white,
         borderRadius:5,
         padding:5,
@@ -46,7 +47,9 @@ export const formStyles = StyleSheet.create({
         borderWidth:1,
         width:consts.widthForm-10,
         borderRadius:3,
-        padding:3
+        padding:3,
+        flexGrow:10
+
     },
     iconInput:{
     },
@@ -56,6 +59,9 @@ export const formStyles = StyleSheet.create({
         padding: 15,
         width:consts.widthForm,
         marginVertical:5,
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
         
     }
         

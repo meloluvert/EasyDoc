@@ -1,6 +1,5 @@
 import * as React from "react";
 import { View, Text, TextInput, Button, SafeAreaView, ImageBackground } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hook/auth";
 import { formStyles } from "./styles";
@@ -19,6 +18,8 @@ import { Alert } from "react-native";
 import * as SQLite from 'expo-sqlite';
 import { IResume } from "../../services/data/Resume";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 type ProfileRouteProp = RouteProp<ProfileStackParamList, 'Profile'>;
 export function Profile({ navigation, route }: ProfileTypes) {
     const [data, setData] = useState<IResume>({ name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Inicializa com um objeto vazio ou com dados padrão
@@ -29,8 +30,8 @@ export function Profile({ navigation, route }: ProfileTypes) {
     useEffect(() => {
         const getData = async () => {
             try {
-                const db = await SQLite.openDatabaseAsync('EasyDoc'); 
-                const result:IResume[] = await db.getAllAsync('SELECT * FROM user')
+                const db = await SQLite.openDatabaseAsync('EasyDoc');
+                const result: IResume[] = await db.getAllAsync('SELECT * FROM user')
                 setData(result[0])
 
 
@@ -39,12 +40,12 @@ export function Profile({ navigation, route }: ProfileTypes) {
             }
         };
 
-    }, []); 
-    
+    }, []);
+
     const storeData = async () => {
         try {
-            const db = await SQLite.openDatabaseAsync('EasyDoc'); 
-           await db.execAsync(`
+            const db = await SQLite.openDatabaseAsync('EasyDoc');
+            await db.execAsync(`
             CREATE TABLE IF NOT EXISTS user(
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 name TEXT,
@@ -56,12 +57,12 @@ export function Profile({ navigation, route }: ProfileTypes) {
             );
         `);
 
-          let contador : number = 0
-          await db.withTransactionAsync(async () => {
-            const result : any = await db.getFirstAsync('SELECT COUNT(*) FROM user');
-            contador = result['COUNT(*)']
-            console.log("quantidade:", contador)
-          });
+            let contador: number = 0
+            await db.withTransactionAsync(async () => {
+                const result: any = await db.getFirstAsync('SELECT COUNT(*) FROM user');
+                contador = result['COUNT(*)']
+                console.log("quantidade:", contador)
+            });
 
             if (contador != 0) {
                 await db.runAsync(`
@@ -75,15 +76,15 @@ export function Profile({ navigation, route }: ProfileTypes) {
             WHERE id = 1;
         `);
             } else {
-               await db.execAsync(`
+                await db.execAsync(`
             INSERT INTO user (name, email, dtNasc, telefone, desc, photoAdress)
-            VALUES ("${data.name}", "${data.email}", "${data.dtNasc}", "${data.telefone}", "${data.desc}", "${imgUrl ? imgUrl : ' ' }");
+            VALUES ("${data.name}", "${data.email}", "${data.dtNasc}", "${data.telefone}", "${data.desc}", "${imgUrl ? imgUrl : ' '}");
         `);
             }
 
             console.log(await db.getAllAsync('SELECT * FROM user'))
             Alert.alert('Dados salvos com sucesso')
-            
+
         } catch (e) {
             console.error('Erro ao salvar dados:', e);
         }
@@ -92,7 +93,7 @@ export function Profile({ navigation, route }: ProfileTypes) {
     const removeData = async () => {
         try {
 
-            const db = await SQLite.openDatabaseAsync('EasyDoc'); 
+            const db = await SQLite.openDatabaseAsync('EasyDoc');
             await db.execAsync(`
             DROP TABLE IF EXISTS user;`);
             setData({ ...data, name: '', email: '', dtNasc: '', telefone: '', desc: '' }); // Limpa o campo 'name' no estado local
@@ -121,17 +122,17 @@ export function Profile({ navigation, route }: ProfileTypes) {
                     }]} onPress={() => navigation.navigate('Adicionar Foto')}>
                         <MaterialIcons name="add-photo-alternate" size={20} color={colors.white} />
                     </TouchableOpacity>
-                    
+
                 </View>
-                
+
                 <TouchableOpacity style={[formStyles.btn, {
-                        position:'absolute',
-                        top:60,
-                        left:10,
-                        width:50
-                    }]} onPress={() => navigation.navigate("QrCode", {whatsAppNumber: data.telefone})}>
-<MaterialCommunityIcons name="qrcode-scan" size={20} color="white" />
-                    </TouchableOpacity>
+                    position: 'absolute',
+                    top: 60,
+                    left: 10,
+                    width: 50
+                }]} onPress={() => navigation.navigate("QrCode", { whatsAppNumber: data.telefone })}>
+                    <MaterialCommunityIcons name="qrcode-scan" size={20} color="white" />
+                </TouchableOpacity>
                 <View style={[formStyles.formInput]}>
                     <Text style={formStyles.label}>Nome</Text>
                     <TextInput
@@ -170,6 +171,29 @@ export function Profile({ navigation, route }: ProfileTypes) {
                     />
                 </View>
                 <View style={formStyles.formInput}>
+                    <Text style={formStyles.label}>Endereço</Text>
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row'
+                    }}>
+                        <TextInput
+                            placeholder='Varginha-MG'
+                            style={[formStyles.TextInp, {
+                                flex:1,
+                                flexGrow:10
+                            }]}
+                            value={data.telefone}
+                            onChangeText={(text) => handleChange({ endereco: text })}
+                        />
+                        <TouchableOpacity style={[formStyles.btn, {
+                            width: 50,
+                            flexGrow: 0.5
+                        }]} onPress={() => navigation.navigate('Endereco')}>
+                            <FontAwesome name="map-marker" size={24} color="white" />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={formStyles.formInput}>
                     <Text style={formStyles.label}>Descrição</Text>
                     <TextInput
                         placeholder=' 
@@ -188,21 +212,6 @@ export function Profile({ navigation, route }: ProfileTypes) {
                 <ButtonInterface title="Excluir" type="primary" onPressI={removeData} style={formStyles.btn} />
             </ScrollView>
         </SafeAreaView>
-        /**
-        <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          <Text style={styles.text}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Text>
-        </ScrollView>
-      </SafeAreaView>
-      */
     );
 }
 const styles = StyleSheet.create({

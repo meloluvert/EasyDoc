@@ -38,6 +38,12 @@
         }
       ],
       [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Permita $(PRODUCT_NAME) para usar a sua localização."
+        }
+      ],
+      [
         "expo-media-library",
         {
           "photosPermission": "Permita $(PRODUCT_NAME) acessar suas fotos.",
