@@ -1,35 +1,67 @@
+import MapView, { Marker, Polyline, Region } from "react-native-maps";
+import React, { useEffect, useState } from "react";
+import { colors } from "../../styles/const";
+import { View } from "react-native";
+import { styles } from "../LocationMap/styles";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { MapTypes } from "../../navigation/ProvaMapa";
 
-import MapView, { Marker, Polyline, Region } from "react-native-maps"
-import React from "react"
-import { colors } from "../../styles/const"
-import { useState } from "react" 
-import { View } from "react-native"
-import { styles } from "../LocationMap/styles"
-import { MapTypes } from "../../navigation/ProvaMapa"
-export function Mapa({navigation, route}:MapTypes) {
-    const [origin, setOrigin] = useState<Region | null>(null)
-    const { cordenadas } = route.params || {};
-    
-    return (
-        <View>
-<MapView region={origin} showsUserLocation = { true} style={styles.map} >
-            <Polyline
-            coordinates={
-        [
-             { latitude: Number(cordenadas.origem.latitude), longitude: Number(cordenadas.origem.longitude) },
-              { latitude: Number(cordenadas.destino.latitude), longitude: Number(cordenadas.destino.longitude) }
-       
-        ]
-    }
-    strokeColor = { colors.primary }
-    strokeWidth = { 2}
-        />	
-        <Marker key={1} coordinate={{ latitude: Number(cordenadas.origem.latitude), longitude: Number(cordenadas.origem.longitude) }} />
-        <Marker key={2} coordinate={{ latitude: Number(cordenadas.destino.latitude), longitude: Number(cordenadas.destino.longitude) }} />
+export function Mapa({ navigation, route }: MapTypes) {
+  const [origin, setOrigin] = useState<Region | null>(null);
+  
+  // Desestruturando as coordenadas da rota com valores padrão para evitar undefined
+  const { cordenadas } = route.params || {};
+const origem = cordenadas?.origem || { latitude: 0, longitude: 0 };
+      const destino = cordenadas?.destino || { latitude: 0, longitude: 0 };
 
+      {/*
+  useEffect(() => {
+    // Aqui você pode adicionar qualquer lógica adicional com as coordenadas, se necessário
+    // Por exemplo, poderia configurar a origem no estado:
+/* setOrigin({
+      latitude: origem.latitude,
+      longitude: origem.longitude,
+      latitudeDelta: 0.0922, // Definindo o zoom inicial
+      longitudeDelta: 0.0421, // Definindo o zoom inicial
+    });
+  }, []);
+*/}
+  return (
+    <View style={styles.container}>
+      <MapView region={{
 
-</MapView>
-        </View>
-                        )
+        longitude: origem.longitude,
+        latitude: destino.latitude,
+        longitudeDelta: 0.09,
+        latitudeDelta:0.06
+      }} showsUserLocation={true} style={styles.map}>
+        <Polyline
+          coordinates={[
+            { latitude: Number(origem.latitude), longitude: Number(origem.longitude) },
+            { latitude: Number(destino.latitude), longitude: Number(destino.longitude) },
+          ]}
+          strokeColor="#000"
+          strokeWidth={2}
+        />
+        <Marker
+          key={1}
+          coordinate={{
+            latitude: Number(origem.latitude),
+            longitude: Number(origem.longitude),
+          }}
+        >
+          <MaterialIcons name="location-history" size={24} color="black" />
+        </Marker>
+        <Marker
+          key={2}
+          coordinate={{
+            latitude: Number(destino.latitude),
+            longitude: Number(destino.longitude),
+          }}
+        >
+          <MaterialIcons name="location-history" size={24} color="black" />
+        </Marker>
+      </MapView>
+    </View>
+  );
 }
-

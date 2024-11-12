@@ -4,7 +4,7 @@ import { MenuTabs } from "../navigation/MainNavigation"
 import { LoginNavigation } from "./AuthNavigation"
 import { Loading } from "../components/Loading"
 import { useAuth } from "../hook/auth"
-
+import { MapNavigation } from "./ProvaMapa"
 export default function Navigaton() {
 
     const { user, loading } = useAuth()
@@ -14,8 +14,9 @@ export default function Navigaton() {
     return (
         <NavigationContainer>
 
-            {user?.token ? <MenuTabs /> : <LoginNavigation />}
-
+        {/* Depois da Prova volta */}
+            {/* {user?.token ? <MenuTabs /> : <LoginNavigation />} */}
+        <MapNavigation/>
         </NavigationContainer>
     )
 }

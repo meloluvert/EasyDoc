@@ -1,34 +1,65 @@
 import React from 'react';
 import { Entrada } from '../screens/Entrada';
-import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import { colors } from '../styles/const';
+import { createBottomTabNavigator, BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { Mapa } from '../screens/Mapa';
-export type MapStackParamList = {
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+export type MapTabParam = {
     "Entrada": undefined
-    "Mapas":coords
+    "Mapas": coords
 }
 export interface coords {
-    origem:{
+    origem: {
         latitude: number,
         longitude: number,
     },
     destino:
     {
         latitude: number,
-        longitude:number,
+        longitude: number,
     }
 }
-type MapScreenNavigationProp = StackNavigationProp<MapStackParamList, 'Entrada'>
+type MapScreenNavigationProp = BottomTabNavigationProp<MapTabParam, 'Entrada'>
 export type MapTypes = {
     navigation: MapScreenNavigationProp
     route: any
 }
 export function MapNavigation() {
-    const Stack = createStackNavigator<MapStackParamList>()
+    const Tab = createBottomTabNavigator<MapTabParam>()
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='Entrada' component={Entrada} />
-            <Stack.Screen name="Mapas" component={Mapa}/>
+        <Tab.Navigator screenOptions={{
+            headerShown: true,
+            tabBarActiveTintColor: colors.primary,
+            tabBarStyle: {
+                position: 'absolute',
+                height: 70,
+                backgroundColor: colors.primary
+            },
+            headerStyle:{
+                backgroundColor: colors.primary,
+            },
+            headerTitleStyle:{
+                color:'#fff'
+            },
+            tabBarActiveBackgroundColor:colors.secondary,
+            tabBarLabelStyle:{
+                color:'white'
+            }
+        }}>
+            <Tab.Screen name='Entrada' component={Entrada} options={{
+                    tabBarIcon: () => (
+                        <FontAwesome5 name='search-location' color="white" size={50}/>
+                    )
+                }}   />
 
-        </Stack.Navigator>
+
+            <Tab.Screen name="Mapas" component={Mapa}options={{
+                    tabBarIcon: () => (
+                        <Entypo name='location-pin' color="white" size={50}/>
+                    )
+                }}   />
+
+        </Tab.Navigator>
     )
 }
