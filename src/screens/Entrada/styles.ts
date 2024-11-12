@@ -3,7 +3,7 @@ import { colors } from "../../styles/const";
 export const styles = StyleSheet.create({
     input:{
         borderColor:colors.primary,
-        padding:3,
+        padding:10,
         borderRadius:10,
         marginVertical:5,
         borderWidth:3,
@@ -13,15 +13,15 @@ export const styles = StyleSheet.create({
         
     },
     titleLabel:{
-        fontSize:20
+        fontSize:20,
+        textAlign:'left',
+        width:'100%'
     },
     containerInside:{
         width:'100%',
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
-        borderColor:'red',
-        borderWidth:1,
     },
     container:{
         margin: 3,
@@ -30,5 +30,18 @@ export const styles = StyleSheet.create({
         display:'flex',
         alignItems:'center',
         justifyContent:'space-around'
+    },
+    btn:{
+        width:'100%',
+        backgroundColor:colors.primary,
+        height:40,
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
+
+    },
+    textBtn:{
+        textAlign:'center',
+        color:'white'
     }
 })

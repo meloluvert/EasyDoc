@@ -8,12 +8,12 @@ import { MapTypes } from "../../navigation/ProvaMapa";
 
 export function Mapa({ navigation, route }: MapTypes) {
   const [origin, setOrigin] = useState<Region | null>(null);
-  
   // Desestruturando as coordenadas da rota com valores padrão para evitar undefined
   const { cordenadas } = route.params || {};
 const origem = cordenadas?.origem || { latitude: 0, longitude: 0 };
       const destino = cordenadas?.destino || { latitude: 0, longitude: 0 };
 
+      console.log(cordenadas)
       {/*
   useEffect(() => {
     // Aqui você pode adicionar qualquer lógica adicional com as coordenadas, se necessário
@@ -30,10 +30,10 @@ const origem = cordenadas?.origem || { latitude: 0, longitude: 0 };
     <View style={styles.container}>
       <MapView region={{
 
-        longitude: origem.longitude,
-        latitude: destino.latitude,
-        longitudeDelta: 0.09,
-        latitudeDelta:0.06
+        longitude: Number(( Number(origem.longitude)   +   Number(origem.longitude))/2),
+        latitude: Number((Number(origem.latitude)+   Number(destino.latitude))/2),
+        latitudeDelta:  1.5,
+        longitudeDelta: 1.5,
       }} showsUserLocation={true} style={styles.map}>
         <Polyline
           coordinates={[

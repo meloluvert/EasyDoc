@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, TextInput, View, Button } from "react-native";
+import { Text, TextInput, View, Button, TouchableOpacity } from "react-native";
 import { colors } from "../../styles/const";
 import { coords as Coords, MapTypes } from "../../navigation/ProvaMapa";
 import { styles } from "./styles";
@@ -64,7 +64,7 @@ export function Entrada({navigation}: MapTypes) {
       />
       </View>
 
-      <Button title="Enviar" onPress={() =>  navigation.navigate('Mapas', { cordenadas:coords })} />
+      <TouchableOpacity style={styles.btn} onPress={() =>  navigation.navigate('Mapas', { cordenadas:coords })} ><Text style={styles.textBtn}>Enviar</Text></TouchableOpacity>
     </View>
   );
 }
