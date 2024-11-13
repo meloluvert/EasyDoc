@@ -30,7 +30,7 @@ const origem = cordenadas?.origem || { latitude: 0, longitude: 0 };
     <View style={styles.container}>
       <MapView region={{
 
-        longitude: Number(( Number(origem.longitude)   +   Number(origem.longitude))/2),
+        longitude: Number(( Number(origem.longitude)   +   Number(destino.longitude))/2),
         latitude: Number((Number(origem.latitude)+   Number(destino.latitude))/2),
         latitudeDelta:  1.5,
         longitudeDelta: 1.5,
