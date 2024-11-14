@@ -16,8 +16,7 @@ export default function Navigaton() {
         <NavigationContainer>
 
         {/* Depois da Prova volta */}
-              {/* {user?.token ? <MenuTabs /> : <LoginNavigation />}  */}
-        <MapNavigation/> 
+               {user?.token ? <MenuTabs /> : <LoginNavigation />}  
         </NavigationContainer>
     )
 }

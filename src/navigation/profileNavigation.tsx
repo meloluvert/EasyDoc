@@ -26,8 +26,8 @@ export function ProfileNavigation() {
             <Stack.Screen name='Adicionar Foto' component={Imagens} />
             <Stack.Screen name='Câmera' component={Camera} />
             <Stack.Screen name='QrCode' component={QrCode} />
-            {/* <Stack.Screen name='Endereco' component={LocationMap} /> */}
-            <Stack.Screen name='Endereco' component={MapNavigation} />
+             <Stack.Screen name='Endereco' component={LocationMap} /> 
+            {/* <Stack.Screen name='Endereco' component={MapNavigation} /> */}
         </Stack.Navigator>
     )
 }

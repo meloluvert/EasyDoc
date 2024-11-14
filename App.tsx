@@ -40,8 +40,6 @@ export default function App() {
         </AuthProvider> 
 
       </>
-      // <SafeAreaView style={stylesArea.container} >
-      // </SafeAreaView>
 
     );
   }
