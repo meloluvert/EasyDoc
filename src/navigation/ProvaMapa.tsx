@@ -5,6 +5,7 @@ import { createBottomTabNavigator, BottomTabNavigationProp } from '@react-naviga
 import { Mapa } from '../screens/Mapa';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Text } from 'react-native';
 export type MapTabParam = {
     "Entrada": undefined
     "Mapas": coords
@@ -25,9 +26,12 @@ export type MapTypes = {
     navigation: MapScreenNavigationProp
     route: any
 }
+
 export function MapNavigation() {
     const Tab = createBottomTabNavigator<MapTabParam>()
     return (
+
+
         <Tab.Navigator screenOptions={{
             headerShown: true,
             tabBarActiveTintColor: colors.primary,
@@ -47,19 +51,29 @@ export function MapNavigation() {
                 color:'white'
             }
         }}>
-            <Tab.Screen name='Entrada' component={Entrada} options={{
-                    tabBarIcon: () => (
-                        <FontAwesome5 name='search-location' color="white" size={50}/>
-                    )
-                }}   />
+            
+            <Tab.Screen name='Entrada' component={Entrada} />
+
+            <Tab.Screen name="Mapas" component={Mapa}/>
+            {/*
+                //options={{
+                //     tabBarIcon: () => (
+                //         <FontAwesome5 name='search-location' color="white" size={50}/>
+                //     )
+                // }}  
+                // />
 
 
-            <Tab.Screen name="Mapas" component={Mapa}options={{
-                    tabBarIcon: () => (
-                        <Entypo name='location-pin' color="white" size={50}/>
-                    )
-                }}   />
+            //options={{
+                //     tabBarIcon: () => (
+                //         <Entypo name='location-pin' color="white" size={50}/>
+                //     )
+                // }}  
+                
+                */}
 
         </Tab.Navigator>
+        
+        
     )
 }

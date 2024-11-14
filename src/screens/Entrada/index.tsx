@@ -65,6 +65,7 @@ export function Entrada({navigation}: MapTypes) {
       </View>
 
       <TouchableOpacity style={styles.btn} onPress={() =>  navigation.navigate('Mapas', { cordenadas:coords })} ><Text style={styles.textBtn}>Enviar</Text></TouchableOpacity>
+    
     </View>
   );
 }

@@ -15,7 +15,7 @@ import { AuthProvider } from "./src/context/auth";
 import Navigaton from "./src/navigation";
 
 export default function App() {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(2)
   let [fontsLoaded] = useFonts({
     OpenSans_800ExtraBold
 
@@ -34,9 +34,11 @@ export default function App() {
 
 
       <>
-        <AuthProvider>
-          <Navigaton />
-        </AuthProvider>
+         <AuthProvider>
+          <Navigaton /> 
+
+        </AuthProvider> 
+
       </>
       // <SafeAreaView style={stylesArea.container} >
       // </SafeAreaView>
