@@ -188,7 +188,8 @@ export function Profile({ navigation, route }: ProfileTypes) {
                         <TouchableOpacity style={[formStyles.btn, {
                             width: 50,
                             flexGrow: 0.5
-                        }]} onPress={() => navigation.navigate('Endereco')}>
+                         }]} onPress={() => navigation.navigate('Acelerometro') }>
+                         {/*navigation.navigate('Endereco')}*/}
                             <FontAwesome name="map-marker" size={24} color="white" />
                         </TouchableOpacity>
                     </View>
