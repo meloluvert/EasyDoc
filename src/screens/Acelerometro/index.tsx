@@ -1,4 +1,4 @@
-import React = require('react');
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
@@ -28,8 +28,9 @@ export function Acelerometro({ navigation, route }: ProfileTypes) {
                     width: 70,
                     height: 50,
                     position: 'absolute',
-                    left: (Dimensions.get("screen").width / 2.5) - (x * Dimensions.get("screen").width / 3)
-                }} />
+                    left: (Dimensions.get("screen").width / 2.5) - (x * Dimensions.get("screen").width / 3),
+                    top: (Dimensions.get("screen").height / 3) - (y*80)
+               }} />
                 <Text style={styles.text}> Accelerometer: (in gs where 1g = 9.81 m/s^2)</Text>
                 <Text style={styles.text}>d: {(Dimensions.get("screen").width / 2).toFixed(4)}</Text>
                 <Text style={styles.text}>x: {x.toFixed(4)}</Text>

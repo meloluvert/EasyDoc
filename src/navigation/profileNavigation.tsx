@@ -6,7 +6,7 @@ import { Camera } from '../screens/Camera';
 import { Imagens } from '../screens/Images';
 import { LocationMap } from '../screens/LocationMap';
 import { MapNavigation } from './ProvaMapa';
-import { Acelerometro } from '../screens/Aceletometro';
+import { Acelerometro } from '../screens/Acelerometro';
 export type ProfileStackParamList = {
     Profile: {imgUrl: string | null, location: string | null}
     "Adicionar Foto": undefined
