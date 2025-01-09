@@ -142,7 +142,9 @@ export function Profile({ navigation, route }: ProfileTypes) {
                         onChangeText={(text) => handleChange({ name: text })}
                     />
                 </View>
-
+                <TouchableOpacity style={formStyles.btn} onPress={() => navigation.navigate("Video")}>
+                   <FontAwesome name="video-camera" />
+                </TouchableOpacity>
                 <View style={formStyles.formInput}>
                     <Text style={formStyles.label}>Email</Text>
                     <TextInput
