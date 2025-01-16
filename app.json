@@ -31,6 +31,15 @@
     "plugins": [
       "expo-font",
       [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#ffffff",
+          "defaultChannel": "default",
+          "enableBackground Remote Notifications": false
+        }
+      ],
+      [
         "expo-camera",
         {
           "cameraPermission": "Permite $(PRODUCT_NAME) acessar a sua câmera",

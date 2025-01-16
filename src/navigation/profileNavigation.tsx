@@ -7,6 +7,7 @@ import { Imagens } from '../screens/Images';
 import { LocationMap } from '../screens/LocationMap';
 import { MapNavigation } from './ProvaMapa';
 import { Acelerometro } from '../screens/Acelerometro';
+import Notification from '../screens/Notification';
 import { Video } from '../screens/Video';
 export type ProfileStackParamList = {
     Profile: {imgUrl: string | null, location: string | null}
@@ -16,6 +17,7 @@ export type ProfileStackParamList = {
     // "Endereco": undefined
     "Acelerometro": undefined
     "Video": undefined
+    "Notificação": undefined
 }
 type ProfileScreenNavigationProp = StackNavigationProp<ProfileStackParamList, 'Profile'>
 export type ProfileTypes = {
@@ -32,7 +34,9 @@ export function ProfileNavigation() {
             <Stack.Screen name='QrCode' component={QrCode} />
             <Stack.Screen name='Video' component={Video}/>
              {/* <Stack.Screen name='Endereco' component={LocationMap} />  */}
-             <Stack.Screen name='Acelerometro' component={Acelerometro} /> 
+             {/* <Stack.Screen name='Acelerometro' component={Acelerometro} />  */}
+             <Stack.Screen name='Notificação' component={Notification} /> 
+
             {/* <Stack.Screen name='Endereco' component={MapNavigation} /> */}
 
         </Stack.Navigator>

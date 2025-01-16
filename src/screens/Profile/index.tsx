@@ -1,5 +1,7 @@
 import * as React from "react";
 import { View, Text, TextInput, Button, SafeAreaView, ImageBackground } from "react-native";
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hook/auth";
 import { formStyles } from "./styles";
@@ -190,9 +192,10 @@ export function Profile({ navigation, route }: ProfileTypes) {
                         <TouchableOpacity style={[formStyles.btn, {
                             width: 50,
                             flexGrow: 0.5
-                         }]} onPress={() => navigation.navigate('Acelerometro') }>
+                         }]} onPress={() => navigation.navigate('Notificação') }>
                          {/*navigation.navigate('Endereco')}*/}
-                            <FontAwesome name="map-marker" size={24} color="white" />
+                            {/* <FontAwesome name="map-marker" size={24} color="white" /> */}
+                            < AntDesign name="notification" />
                         </TouchableOpacity>
                     </View>
                 </View>
